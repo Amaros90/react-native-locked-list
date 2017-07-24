@@ -8,12 +8,20 @@ import com.facebook.react.views.scroll.ReactScrollView;
 
 public class LockedScrollView extends ReactScrollView {
 
-    public static boolean ShouldScroll = false;
-    public static boolean IsLocked = true;
+    private boolean _shouldScroll = false;
+    private boolean _isLocked = true;
 
     public LockedScrollView(ReactContext context) {
         super(context);
         //super.setFillViewport(true);
+    }
+
+    public void setShouldScroll(boolean value) {
+        _shouldScroll = value;
+    }
+
+    public void setIsLocked(boolean value) {
+        _isLocked = value;
     }
 
     @Override
@@ -26,7 +34,7 @@ public class LockedScrollView extends ReactScrollView {
 
                 LockedScrollView parentScroll = ((LockedScrollView)v.getParent());
 
-                if (parentScroll.IsLocked && parentScroll.ShouldScroll) {
+                if (parentScroll._isLocked && parentScroll._shouldScroll) {
                     parentScroll.scrollTo(parentScroll.getScrollX(), parentScroll.getScrollY() + (bottom - oldBottom));
                 }
             }
