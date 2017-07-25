@@ -41,14 +41,14 @@ public class LockedScrollViewManager extends ReactScrollViewManager {
     return REACT_CLASS;
   }
 
-//   @ReactProp(name = "isLocked", defaultBoolean = true)
-//   public void setIsLocked(LockedScrollView view, boolean value) {
-//     view.setIsLocked(value);
-//   }
-//
-//   @ReactProp(name = "shouldScroll", defaultBoolean = true)
-//   public void setShouldScroll(LockedScrollView view, boolean value) {
-//     view.setShouldScroll(value);
-//   }
+   @ReactProp(name = "isLocked", defaultBoolean = true)
+   public void setIsLocked(LockedScrollView view, boolean value) {
+     view.setIsLocked(value);
+   }
+
+   @ReactProp(name = "shouldScroll", defaultBoolean = true)
+   public void setShouldScroll(LockedScrollView view, boolean value) {
+     view.setShouldScroll(value);
+   }
 }
 

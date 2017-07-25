@@ -24,8 +24,8 @@ public class LockedScrollView extends ReactScrollView {
     }
 
     @Override
-    public void addView(View child, ViewGroup.LayoutParams params) {
-        super.addView(child, params);
+    public void addView(View child, int index) {
+        super.addView(child, index);
 
         this.getChildAt(0).addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {requireNativeComponent, ScrollView, View} from 'react-native'
 
 const nativeOnlyProps = {
@@ -16,7 +17,9 @@ const baseVertical = {
 
 const LockableScrollView = React.createClass({
   propTypes: {
-    ...ScrollView.propTypes
+    ...ScrollView.propTypes,
+    isLocked: PropTypes.bool,
+    shouldScroll: PropTypes.bool
   },
 
   render: function() {
