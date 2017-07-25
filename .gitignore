@@ -1,4 +1,4 @@
-android/.idea/**
+android/.idea
 npm-debug.log
 dev.properties
 node_modules
