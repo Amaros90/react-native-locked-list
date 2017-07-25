@@ -12,7 +12,7 @@ const nativeOnlyProps = {
 const IndexedView = React.createClass({
   propTypes: {
     ...View.propTypes,
-    index: PropTypes.number,    
+    indexx: PropTypes.number,    
   },
 
   render: function() {

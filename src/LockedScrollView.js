@@ -30,9 +30,9 @@ const LockableScrollView = React.createClass({
           showsVerticalScrollIndicator={true}
           {...this.props} >
           <LockedView collapsable={false}>
-            {this.props.children.map(child => {
+            {this.props.children.map((child, i) => {
               return (
-                <IndexedView index={child.props.index}>
+                <IndexedView indexx={this.props.newIndex}>
                   {child}
                 </IndexedView>
               )

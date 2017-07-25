@@ -7,23 +7,21 @@ import LockedScrollView from './LockedScrollView';
 export default class LockedFlatList extends Component {
   state = {
     data: range(1, 50),
-    //shouldScroll: false
+    newIndex: -1
   }
 
   render() {
     return(
       <View>
         <Button onPress={() => {
-          this.setState({shouldScroll: true})          
-          setTimeout(() => this.setState({data: [-1, ...this.state.data]}), 10);
+          this.setState({data: [-1, ...this.state.data], newIndex: 0});
         }} title="Above"/>
         <Button onPress={() => {
-          //this.setState({shouldScroll: true})     
-          setTimeout(() => this.setState({data: [...this.state.data, -1]}), 10);               
+          this.setState({data: [...this.state.data, -1], newIndex: -1});
         }} title="Below"/>        
         <FlatList 
-          data={this.state.data} 
-          renderScrollComponent={props => <LockedScrollView shouldScroll={this.state.shouldScroll} {...props}/>} 
+          data={this.state.data}           
+          renderScrollComponent={props => <LockedScrollView shouldScroll={this.state.shouldScroll} {...props} newIndex={this.state.newIndex}/>} 
           renderItem={({item}) => <View style={{margin: 10, height: 50, width: "80%", backgroundColor: numberToColor(item)}} /> } />        
       </View>
 
