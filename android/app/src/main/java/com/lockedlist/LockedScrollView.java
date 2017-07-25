@@ -8,7 +8,8 @@ import com.facebook.react.views.scroll.ReactScrollView;
 
 public class LockedScrollView extends ReactScrollView {
 
-    private boolean _shouldScroll = false;
+    private Object _foo = new Object();
+    private boolean _shouldScroll = true;
     private boolean _isLocked = true;
 
     public LockedScrollView(ReactContext context) {
@@ -16,7 +17,9 @@ public class LockedScrollView extends ReactScrollView {
     }
 
     public void setShouldScroll(boolean value) {
-        _shouldScroll = value;
+        synchronized(_foo) {
+            _shouldScroll = value;
+        }
     }
 
     public void setIsLocked(boolean value) {
@@ -32,9 +35,10 @@ public class LockedScrollView extends ReactScrollView {
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
 
                 LockedScrollView parentScroll = ((LockedScrollView)v.getParent());
-
-                if (parentScroll._isLocked && parentScroll._shouldScroll) {
-                    parentScroll.scrollTo(parentScroll.getScrollX(), parentScroll.getScrollY() + (bottom - oldBottom));
+                synchronized(_foo) {
+                    if (parentScroll._isLocked && _shouldScroll) {
+                        parentScroll.scrollTo(parentScroll.getScrollX(), parentScroll.getScrollY() + (bottom - oldBottom));
+                    }
                 }
             }
         });
