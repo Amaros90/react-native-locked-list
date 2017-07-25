@@ -30,10 +30,24 @@ public class LockedScrollView extends ReactScrollView {
     public void addView(View child, int index) {
         super.addView(child, index);
 
+        ((ReactViewGroup)this.getChildAt(0)).setOnHierarchyChangeListener(new OnHierarchyChangeListener() {
+            @Override
+            public void onChildViewAdded(View parent, View child) {
+                int g = 7;
+
+            }
+
+            @Override
+            public void onChildViewRemoved(View parent, View child) {
+
+            }
+        });
+
         this.getChildAt(0).addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
             LockedScrollView parentScroll = ((LockedScrollView)v.getParent());
+
 
             if (((ReactViewGroup)v).getChildAt(0) != lastTopView)
 //            if (parentScroll._isLocked && _shouldScroll)

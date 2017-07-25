@@ -16,21 +16,29 @@ const baseVertical = {
     overflow: 'scroll'
 }
 
+const IndexedView = View;
+
 const LockableScrollView = React.createClass({
   propTypes: {
     ...ScrollView.propTypes,
     isLocked: PropTypes.bool,
     shouldScroll: PropTypes.bool
   },
-
+  
   render: function() {
       return (
         <RCTLockedScroll style={baseVertical}
           showsVerticalScrollIndicator={true}
           {...this.props} >
-          <LockedView {...this.props} collapsable={false}>
-            {this.props.children}
-          </LockedView>
+          <View collapsable={false}>
+            {this.props.children.map(child => {
+              return (
+                <IndexedView index={child.props.index}>
+                  {child}
+                </IndexedView>
+              )
+            })}
+          </View>
         </RCTLockedScroll>
       )
   },

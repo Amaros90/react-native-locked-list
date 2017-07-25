@@ -22,7 +22,9 @@ public class LockedScrollReactPackage implements ReactPackage {
   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
     return Arrays.<ViewManager>asList(
             new LockedScrollViewManager(),
-            new LockedViewManager()
+            new LockedViewManager(),
+            new IndexedViewManager()
+
     );
   }
 
