@@ -27,23 +27,9 @@ import com.facebook.yoga.YogaConstants;
 import java.util.HashMap;
 import java.util.Map;
 
-@ReactModule(name = LockedScrollModule.REACT_CLASS)
-public class LockedScrollModule extends SimpleViewManager<LockedScrollView> {
-
-  private static final String SHOULD_SCROLL_KEY = "SHOULDSCROLL";
-  private static final String IS_LOCKED_KEY = "ISLOCKED";
+public class LockedScrollViewManager extends ReactScrollViewManager {
 
   protected static final String REACT_CLASS = "RCTLockedScroll";
-
-  private @Nullable FpsListener mFpsListener = null;
-
-  public LockedScrollModule() {
-    this(null);
-  }
-
-  public LockedScrollModule(@Nullable FpsListener fpsListener) {
-    mFpsListener = fpsListener;
-  }
 
   @Override
   public LockedScrollView createViewInstance(ThemedReactContext context) {
@@ -55,14 +41,14 @@ public class LockedScrollModule extends SimpleViewManager<LockedScrollView> {
     return REACT_CLASS;
   }
 
-  @ReactProp(name = "isLocked", defaultBoolean = true)
-  public void setIsLocked(LockedScrollView view, boolean value) {
-    view.setIsLocked(value);
-  }
-
-  @ReactProp(name = "shouldScroll", defaultBoolean = true)
-  public void setShouldScroll(LockedScrollView view, boolean value) {
-    view.setShouldScroll(value);
-  }
+//   @ReactProp(name = "isLocked", defaultBoolean = true)
+//   public void setIsLocked(LockedScrollView view, boolean value) {
+//     view.setIsLocked(value);
+//   }
+//
+//   @ReactProp(name = "shouldScroll", defaultBoolean = true)
+//   public void setShouldScroll(LockedScrollView view, boolean value) {
+//     view.setShouldScroll(value);
+//   }
 }
 

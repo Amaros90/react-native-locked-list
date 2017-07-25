@@ -13,7 +13,6 @@ public class LockedScrollView extends ReactScrollView {
 
     public LockedScrollView(ReactContext context) {
         super(context);
-        //super.setFillViewport(true);
     }
 
     public void setShouldScroll(boolean value) {
