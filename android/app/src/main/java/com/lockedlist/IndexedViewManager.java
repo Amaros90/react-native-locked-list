@@ -11,21 +11,9 @@ import com.facebook.react.views.view.ReactViewManager;
 
 import javax.annotation.Nullable;
 
-class MyViewGroup extends ReactViewGroup {
-
-    public MyViewGroup(Context context) {
-        super(context);
-    }
-}
-
 @ReactModule(name = IndexedViewManager.REACT_CLASS)
 public class IndexedViewManager extends ReactViewManager {
     protected static final String REACT_CLASS = "RCTIndexedView";
-
-    @Override
-    public MyViewGroup createViewInstance(ThemedReactContext context) {
-        return new MyViewGroup(context);
-    }
 
     @Override
     public String getName() {
@@ -33,7 +21,7 @@ public class IndexedViewManager extends ReactViewManager {
     }
 
     @ReactProp(name = "index")
-    public void setIndex(MyViewGroup view, int index) {
+    public void setIndex(ReactViewGroup view, int index) {
         view.setTag(index);
     }
 }
