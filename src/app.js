@@ -6,8 +6,16 @@ import LockedScrollView from './LockedScrollView';
 
 export default class LockedFlatList extends Component {
   state = {
-    data: range(1, 20000)
+    data: range(1, 200000)
   }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({data: [100, ...this.state.data]})
+    }, 5000)
+    
+  }
+
   render() {
     return(
       <FlatList 
