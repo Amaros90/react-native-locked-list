@@ -33,7 +33,7 @@ public class IndexedViewManager extends ReactViewManager {
     }
 
     @ReactProp(name = "index")
-    public void setIndex(MyViewGroup view, boolean index) {
+    public void setIndex(MyViewGroup view, int index) {
         view.setTag(index);
     }
 }

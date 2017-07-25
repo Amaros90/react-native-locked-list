@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {requireNativeComponent, ScrollView, View} from 'react-native'
-import LockedView from './LockedView';
+import IndexedView from './IndexedView';
 
 const nativeOnlyProps = {
   nativeOnly: {
@@ -15,8 +15,6 @@ const baseVertical = {
     flexDirection: 'column',
     overflow: 'scroll'
 }
-
-const IndexedView = View;
 
 const LockableScrollView = React.createClass({
   propTypes: {
