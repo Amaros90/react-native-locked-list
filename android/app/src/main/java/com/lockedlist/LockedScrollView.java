@@ -5,21 +5,21 @@ import android.view.ViewGroup;
 
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.views.scroll.ReactScrollView;
+import com.facebook.react.views.view.ReactViewGroup;
 
 public class LockedScrollView extends ReactScrollView {
 
-    private Object _foo = new Object();
-    private boolean _shouldScroll = true;
-    private boolean _isLocked = true;
+    //private Object _foo = new Object();
+    public static boolean _shouldScroll = true;
+    private static boolean _isLocked = true;
+    public static View lastTopView = null;
 
     public LockedScrollView(ReactContext context) {
         super(context);
     }
 
-    public void setShouldScroll(boolean value) {
-        synchronized(_foo) {
-            _shouldScroll = value;
-        }
+    public static void setShouldScroll(boolean value) {
+        _shouldScroll = value;
     }
 
     public void setIsLocked(boolean value) {
@@ -33,13 +33,11 @@ public class LockedScrollView extends ReactScrollView {
         this.getChildAt(0).addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+            LockedScrollView parentScroll = ((LockedScrollView)v.getParent());
 
-                LockedScrollView parentScroll = ((LockedScrollView)v.getParent());
-                synchronized(_foo) {
-                    if (parentScroll._isLocked && _shouldScroll) {
-                        parentScroll.scrollTo(parentScroll.getScrollX(), parentScroll.getScrollY() + (bottom - oldBottom));
-                    }
-                }
+            if (((ReactViewGroup)v).getChildAt(0) != lastTopView)
+//            if (parentScroll._isLocked && _shouldScroll)
+                parentScroll.scrollTo(parentScroll.getScrollX(), parentScroll.getScrollY() + (bottom - oldBottom));
             }
         });
     }

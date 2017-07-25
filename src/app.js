@@ -6,12 +6,8 @@ import LockedScrollView from './LockedScrollView';
 
 export default class LockedFlatList extends Component {
   state = {
-    data: range(1, 200),
-    shouldScroll: false
-  }
-
-  componentDidMount() {
-    
+    data: range(1, 50),
+    //shouldScroll: false
   }
 
   render() {
@@ -19,11 +15,11 @@ export default class LockedFlatList extends Component {
       <View>
         <Button onPress={() => {
           this.setState({shouldScroll: true})          
-          //setTimeout(() => this.setState({data: [100, ...this.state.data], shouldScroll: false}), 1000);
+          setTimeout(() => this.setState({data: [-1, ...this.state.data]}), 10);
         }} title="Above"/>
         <Button onPress={() => {
-          this.setState({shouldScroll: true})     
-          //setTimeout(() => this.setState({data: [...this.state.data, 100], shouldScroll: false}), 1000);               
+          //this.setState({shouldScroll: true})     
+          setTimeout(() => this.setState({data: [...this.state.data, -1]}), 10);               
         }} title="Below"/>        
         <FlatList 
           data={this.state.data} 
@@ -36,6 +32,10 @@ export default class LockedFlatList extends Component {
 }
 
 const numberToColor = number => {
+
+  if (number == -1)
+    return "gold";
+
   switch (number % 3) {
     case 0: return "red"
     case 1: return "blue"
