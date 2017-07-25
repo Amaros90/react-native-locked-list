@@ -12,12 +12,12 @@ const nativeOnlyProps = {
 const IndexedView = React.createClass({
   propTypes: {
     ...View.propTypes,
-    index: PropTypes.string,    
+    index: PropTypes.bool,    
   },
 
   render: function() {
       return (
-          <RCTIndexedView index={this.props.index} collapsable={false}/>
+          <RCTIndexedView index={"a"} collapsable={false}/>
       )
   },
 })
