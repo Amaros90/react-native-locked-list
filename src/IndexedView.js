@@ -17,7 +17,7 @@ const IndexedView = React.createClass({
 
   render: function() {
       return (
-          <RCTIndexedView index={"a"} collapsable={false} {...this.props}/>
+          <RCTIndexedView collapsable={false} {...this.props}/>
       )
   },
 })

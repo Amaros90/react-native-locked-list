@@ -20,6 +20,11 @@ public class IndexedViewManager extends ReactViewManager {
         return REACT_CLASS;
     }
 
+    /*@ReactProp(name = "index")
+    public void setIndex(ReactViewGroup view, int index) {
+        view.setTag(index);
+    }*/
+
     @ReactProp(name = "index")
     public void setIndex(ReactViewGroup view, int index) {
         view.setTag(index);
