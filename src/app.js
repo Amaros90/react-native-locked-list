@@ -8,8 +8,7 @@ let nextItem = 100;
 
 export default class LockedFlatList extends Component {
   state = {
-    items: range(1, 20),
-    lastAddedIndex: -1
+    items: range(1, 20)
   }
 
   render() {
