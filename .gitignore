@@ -1,4 +1,6 @@
-android/.idea
+android/.idea/*
+android/.gradle/*
+android/local.properties
 npm-debug.log
 dev.properties
 node_modules

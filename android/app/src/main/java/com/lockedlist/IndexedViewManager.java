@@ -1,6 +1,7 @@
 package com.lockedlist;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import com.facebook.react.module.annotations.ReactModule;
@@ -27,6 +28,7 @@ public class IndexedViewManager extends ReactViewManager {
 
     @ReactProp(name = "indexx")
     public void setIndexx(ReactViewGroup view, int index) {
+        Log.i("test", "????");
         view.setTag(index);
     }
 }

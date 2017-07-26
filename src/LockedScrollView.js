@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {requireNativeComponent, ScrollView, View} from 'react-native'
+import _ from 'lodash';
 import IndexedView from './IndexedView';
 import LockedView from './LockedView';
 
@@ -17,31 +18,39 @@ const baseVertical = {
     overflow: 'scroll'
 }
 
-const LockableScrollView = React.createClass({
-  propTypes: {
-    ...ScrollView.propTypes,
-    isLocked: PropTypes.bool,
-    shouldScroll: PropTypes.bool
-  },
-  
-  render: function() {
+class LockableScrollView extends React.Component {
+  state = {
+    lastAddedIndex: null
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const newKey = _.first(_.difference(nextProps.children.map(c => c.key), this.props.children.map(c => c.key)));
+    if (newKey === -1) return;
+    const lastAddedIndex = _.findIndex(nextProps.children, c => c.key === newKey)
+    this.setState({lastAddedIndex});
+  }
+
+  render() {
       return (
-        <RCTLockedScroll style={baseVertical}
+        <RCTLockedScroll 
+          style={baseVertical}
           showsVerticalScrollIndicator={true}
+          shouldScroll={this.state.lastAddedIndex === 0}
           {...this.props} >
-          <LockedView collapsable={false}>
-            {this.props.children.map((child, i) => {
-              return (
-                <IndexedView indexx={this.props.newIndex}>
-                  {child}
-                </IndexedView>
-              )
-            })}
-          </LockedView>
+          <View collapsable={false}>
+              {this.props.children}
+          </View>
         </RCTLockedScroll>
-      )
-  },
-})
+      )    
+  }
+
+}
+
+LockableScrollView.propTypes = {
+    ...ScrollView.propTypes,
+    enabled: PropTypes.bool,
+    shouldScroll: PropTypes.bool  
+}
 
 var RCTLockedScroll = requireNativeComponent('RCTLockedScroll', LockableScrollView, nativeOnlyProps)
 export default LockableScrollView

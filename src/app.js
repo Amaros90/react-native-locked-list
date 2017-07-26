@@ -4,25 +4,29 @@ import {range} from 'lodash';
 
 import LockedScrollView from './LockedScrollView';
 
+let nextItem = 100;
+
 export default class LockedFlatList extends Component {
   state = {
-    data: range(1, 50),
-    newIndex: -1
+    items: range(1, 20),
+    lastAddedIndex: -1
   }
 
   render() {
     return(
       <View>
         <Button onPress={() => {
-          this.setState({data: [-1, ...this.state.data], newIndex: 0});
+          this.setState({items: [++nextItem, ...this.state.items]});
         }} title="Above"/>
         <Button onPress={() => {
-          this.setState({data: [...this.state.data, -1], newIndex: -1});
+          this.setState({items: [...this.state.items, ++nextItem]});
         }} title="Below"/>        
+       
         <FlatList 
-          data={this.state.data}           
-          renderScrollComponent={props => <LockedScrollView shouldScroll={this.state.shouldScroll} {...props} newIndex={this.state.newIndex}/>} 
-          renderItem={({item}) => <View style={{margin: 10, height: 50, width: "80%", backgroundColor: numberToColor(item)}} /> } />        
+          data={this.state.items}           
+          renderScrollComponent={props => <LockedScrollView {...props} />} 
+          renderItem={({item}) => <View style={{margin: 10, height: 50, width: "80%", backgroundColor: numberToColor(item)}} /> } />
+
       </View>
 
     )
@@ -31,7 +35,7 @@ export default class LockedFlatList extends Component {
 
 const numberToColor = number => {
 
-  if (number == -1)
+  if (number > 100)
     return "gold";
 
   switch (number % 3) {
@@ -40,3 +44,11 @@ const numberToColor = number => {
     case 2: return "green"
   }
 }
+
+
+
+
+/*
+        <LockedScrollView {...this.props}>
+          {this.state.items.map(item => <View key={item} style={{margin: 10, height: 50, width: "80%", backgroundColor: numberToColor(item)}} />)}
+        </LockedScrollView>          */
