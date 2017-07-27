@@ -35,10 +35,14 @@ class LockableScrollView extends React.Component {
         <RCTLockedScroll 
           style={baseVertical}
           showsVerticalScrollIndicator={true}
-          shouldScroll={this.state.lastAddedIndex === 0}
+          shouldScroll={true}
           {...this.props} >
           <View collapsable={false}>
-              {this.props.children}
+              {this.props.children.map(child => 
+                (<IndexedView indexx={child.props.test}>
+                  {child} 
+                </IndexedView>))
+              }
           </View>
         </RCTLockedScroll>
       )    

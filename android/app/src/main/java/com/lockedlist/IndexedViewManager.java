@@ -28,7 +28,6 @@ public class IndexedViewManager extends ReactViewManager {
 
     @ReactProp(name = "indexx")
     public void setIndexx(ReactViewGroup view, int index) {
-        Log.i("test", "????");
         view.setTag(index);
     }
 }

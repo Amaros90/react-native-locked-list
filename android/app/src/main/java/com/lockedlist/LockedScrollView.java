@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.views.scroll.ReactScrollView;
+import com.facebook.react.views.view.ReactViewGroup;
 
 public class LockedScrollView extends ReactScrollView {
 
@@ -26,6 +27,19 @@ public class LockedScrollView extends ReactScrollView {
     public void addView(View child, int index) {
         super.addView(child, index);
 
+        ((ReactViewGroup)this.getChildAt(0)).setOnHierarchyChangeListener(new OnHierarchyChangeListener() {
+            @Override
+            public void onChildViewAdded(View view, View child) {
+                //save latest view as a private member and query in on the layout listener below
+                if (child.getTag() != null && (int)child.getTag() == 0)
+                    _shouldScroll = true;
+            }
+
+            @Override
+            public void onChildViewRemoved(View view, View view1) {
+
+            }
+        });
 
         this.getChildAt(0).addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
@@ -34,10 +48,11 @@ public class LockedScrollView extends ReactScrollView {
 
                 LockedScrollView parentScroll = ((LockedScrollView)v.getParent());
 
-
-                if (_shouldScroll)
+                if (_shouldScroll) {
                     parentScroll.scrollTo(parentScroll.getScrollX(), parentScroll.getScrollY() + (bottom - oldBottom));
+                    _shouldScroll = false;
                 }
+            }
         });
     }
 

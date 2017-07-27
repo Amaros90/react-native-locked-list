@@ -26,9 +26,7 @@ public class LockedScrollViewManager extends ReactScrollViewManager {
 
     @ReactProp(name = "shouldScroll")
     public void setShouldScroll(LockedScrollView view, boolean value) {
-        view.setShouldScroll(value);
+        //view.setShouldScroll(value);
     }
-
-    //
 }
 
